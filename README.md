@@ -6,12 +6,7 @@
 </div>
 
 ## Why?
-I got tired coding Minecrafts text objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`).
-And if you need to concatenate multiple `Text` objects, it becomes even worse. 
-That's why I've created this library to help people write these kinds of literals easily 
-and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or 
-`HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can 
-make a pull request!
+I got tired coding Minecrafts text objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`). And if you need to concatenate multiple `Text` objects, it becomes even worse. That's why I've created this library to help people write these kinds of literals easily and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or `HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can make a pull request!
 
 ## Basic syntax
 There are a few placeholders that you need to know about:
