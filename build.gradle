@@ -1,0 +1,22 @@
+allprojects {
+    apply plugin: 'java'
+
+    group = 'dev.cattyn'
+    version = project.version
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+}
+
+subprojects {
+
+}

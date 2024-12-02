@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "catformat",
+  "version": "${version}",
+  "name": "CatFormat",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/cattyngmd/CatFormat"
+  },
+  "license": "MIT",
+  "icon": "assets/catformat/icon.png",
+  "environment": "client",
+  "entrypoints": {
+  },
+  "mixins": [
+    "catformat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
