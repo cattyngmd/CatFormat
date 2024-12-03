@@ -1,17 +1,12 @@
 <div align="center">
 <h1>Cat Format</h1> 
-<p> Simple and easy-to-use text formatting tool for Java (primarily made for Minecraft). </p>
+<p> Simple and easy-to-use text formatting tool for Java (primarily made for Minecraft) </p>
 
 ![CatFormatIcon](catformat-fabric/src/main/resources/assets/catformat/icon.png)
 </div>
 
 ## Why?
-I got tired coding Minecrafts text objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`).
-And if you need to concatenate multiple `Text` objects, it becomes even worse. 
-That's why I've created this library to help people write these kinds of literals easily 
-and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or 
-`HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can 
-make a pull request!
+I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`). And if you need to concatenate multiple `Text` objects, it becomes even worse. That's why I've created this library to help people write these kinds of literals easily and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or `HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can make a pull request!
 
 ## Basic syntax
 There are a few placeholders that you need to know about:
@@ -57,10 +52,9 @@ void func() {
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'
   formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
   formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'
-  formatter.format("#{red+bold} Hello {} world!"); // red colored 'Hello' with bold style
-  // and ' world!' without any style
+  formatter.format("${red+bold} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
 
-  // It also supports javas default formatting tool - String.format()
+  // It also supports Java's default formatting tool - String.format()
   formatter.format("${red} Hello %s!", "world"); // red colored 'Hello world!'
 
   // You can create your own color namespaces too!
@@ -71,7 +65,7 @@ void func() {
 }
 ```
 
-To use it in minecraft plugin or any other project you can make your own TextWrapper. For example
+To use it in a Minecraft plugin or any other project you can make your own `TextWrapper`. For example
 ```java
 import dev.cattyn.catformat.CatWrapper;
 import dev.cattyn.catformat.text.TextWrapper;
