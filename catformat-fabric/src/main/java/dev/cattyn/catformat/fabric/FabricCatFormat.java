@@ -9,7 +9,7 @@ public class FabricCatFormat extends CatFormat<MutableText> {
         super(new FabricWrapper());
     }
 
-    public CatFormat<MutableText> addVanilla() {
+    public FabricCatFormat addVanilla() {
         for (Formatting value : Formatting.values()) {
             if (!value.isColor() || value.getColorValue() == null) {
                 continue;
