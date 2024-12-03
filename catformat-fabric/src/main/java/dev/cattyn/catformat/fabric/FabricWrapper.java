@@ -1,4 +1,4 @@
-package dev.cattyn.catformat.mod;
+package dev.cattyn.catformat.fabric;
 
 import dev.cattyn.catformat.text.Modifiers;
 import dev.cattyn.catformat.text.TextWrapper;
@@ -6,7 +6,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-public class VanillaWrapper implements TextWrapper<MutableText> {
+public class FabricWrapper implements TextWrapper<MutableText> {
     @Override
     public MutableText colored(MutableText text, int color) {
         return text.withColor(color);

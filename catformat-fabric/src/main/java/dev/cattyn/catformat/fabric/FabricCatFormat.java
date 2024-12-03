@@ -1,12 +1,12 @@
-package dev.cattyn.catformat.mod;
+package dev.cattyn.catformat.fabric;
 
 import dev.cattyn.catformat.CatFormat;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
-public class VanillaCatFormat extends CatFormat<MutableText> {
-    public VanillaCatFormat() {
-        super(new VanillaWrapper());
+public class FabricCatFormat extends CatFormat<MutableText> {
+    public FabricCatFormat() {
+        super(new FabricWrapper());
     }
 
     public CatFormat<MutableText> addVanilla() {

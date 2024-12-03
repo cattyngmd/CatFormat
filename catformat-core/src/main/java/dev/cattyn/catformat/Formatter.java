@@ -126,9 +126,6 @@ class Formatter<T> {
 
     private boolean checkExpr(char opcode, boolean expr) {
         if (!isExprBracket(opcode)) return expr;
-        if (opcode == BEGIN_EXPR && expr) {
-            throw new RuntimeException("Syntax error");
-        }
         return opcode == BEGIN_EXPR;
     }
 }
