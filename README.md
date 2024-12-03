@@ -25,17 +25,33 @@ e.g `${+bi}` - ***bold + italic***.
   - u - <ins> underline text </ins>
   - s - ~~strikethrough text~~
 
+## Installing
+You can install this library using Jitpack.io
+
+Add jitpack repository to your `build.gradle`:
+```gradle
+maven { url "https://jitpack.io"  }
+```
+
+And then add CatFormat as a dependency:
+```gradle
+implementation("com.github.cattyngmd.catformat:catformat-core:1.0.0")
+```
+Or if you use fabric
+```gradle
+modImplementation("com.github.cattyngmd.catformat:catformat-fabric:1.0.0")
+```
 
 ## Example
 Simple usage with Minecraft's built-in `MutableText`:
 
 ```java
-import dev.cattyn.catformat.mod.VanillaCatFormat;
+import dev.cattyn.catformat.fabric.FabricCatFormat;
 
 import java.util.Random;
 
 void func() {
-  VanillaCatFormat formatter = new VanillaCatFormat();
+  FabricCatFormat formatter = new FabricCatFormat();
   formatter.addVanilla();
 
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'
