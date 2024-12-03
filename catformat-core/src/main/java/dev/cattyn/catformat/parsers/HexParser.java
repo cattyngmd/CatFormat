@@ -8,7 +8,8 @@ public class HexParser implements Parser {
         if (expr.length() == 3) {
             // css color support
             char[] c = expr.toCharArray();
-            expr = "" + c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+            String hex = "" + c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+            return Integer.parseInt(hex, 16);
         }
         return Integer.parseInt(expr, 16);
     }

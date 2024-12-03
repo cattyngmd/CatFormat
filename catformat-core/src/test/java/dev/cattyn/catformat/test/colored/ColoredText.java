@@ -1,4 +1,4 @@
-package colored;
+package dev.cattyn.catformat.test.colored;
 
 import dev.cattyn.catformat.text.Modifiers;
 

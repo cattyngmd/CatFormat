@@ -1,4 +1,4 @@
-package content;
+package dev.cattyn.catformat.test.content;
 
 import dev.cattyn.catformat.text.Modifiers;
 import dev.cattyn.catformat.text.TextWrapper;

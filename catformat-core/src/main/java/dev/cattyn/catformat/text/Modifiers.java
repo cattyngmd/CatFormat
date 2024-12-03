@@ -3,7 +3,10 @@ package dev.cattyn.catformat.text;
 import java.util.Objects;
 
 public class Modifiers {
-    private boolean bold, italic, underline, strikethrough;
+    private boolean bold;
+    private boolean italic;
+    private boolean underline;
+    private boolean strikethrough;
 
     public boolean isBold() {
         return bold;

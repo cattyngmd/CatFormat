@@ -1,6 +1,8 @@
-import colored.ColoredText;
-import colored.ColoredTextWrapper;
-import content.ContentWrapper;
+package dev.cattyn.catformat.test;
+
+import dev.cattyn.catformat.test.colored.ColoredText;
+import dev.cattyn.catformat.test.colored.ColoredTextWrapper;
+import dev.cattyn.catformat.test.content.ContentWrapper;
 import dev.cattyn.catformat.CatFormat;
 import dev.cattyn.catformat.text.Modifiers;
 import org.junit.jupiter.api.Test;

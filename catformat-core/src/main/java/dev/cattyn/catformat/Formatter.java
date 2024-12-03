@@ -24,8 +24,12 @@ class Formatter<T> {
 
     private Parser parser = null;
     private int color = 0xFFFFFF;
-    private boolean isExpr, skipComment, skipSpace;
-    private boolean reset = true;
+
+    private boolean isExpr;
+    private boolean skipComment;
+    private boolean skipSpace;
+    private boolean reset;
+
     private char prevOpcode;
 
     Formatter(CatFormat<T> catFormat, String target) {
@@ -33,6 +37,7 @@ class Formatter<T> {
         this.target = target;
         this.wrapper = catFormat.getWrapper();
         this.core = this.wrapper.newText();
+        this.reset = true;
     }
 
     public T handle() {
@@ -44,23 +49,7 @@ class Formatter<T> {
             boolean wasExpression = isExpr;
             isExpr = checkExpr(c, isExpr);
             if (isExpr) {
-                if (c == BEGIN_EXPR) {
-                    parser = getParser();
-                    if (parser != null) {
-                        chunk.setLength(chunk.length() - 1);
-                    }
-                    if (canConcat()) {
-                        core = wrapper.concat(core, build(chunk));
-                    }
-                    modifiers.clear();
-                    continue;
-                }
-                if (c == MODIFY_INSTR || !modifiers.isEmpty()) {
-                    modifiers.add(Character.toLowerCase(c));
-                    continue;
-                }
-                expr.append(c);
-                prevOpcode = c;
+                handleExpr(c);
                 continue;
             }
 
@@ -81,6 +70,26 @@ class Formatter<T> {
             core = wrapper.concat(core, build(chunk));
         }
         return core;
+    }
+
+    private void handleExpr(char opcode) {
+        if (opcode == BEGIN_EXPR) {
+            parser = getParser();
+            if (parser != null) {
+                chunk.setLength(chunk.length() - 1);
+            }
+            if (canConcat()) {
+                core = wrapper.concat(core, build(chunk));
+            }
+            modifiers.clear();
+            return;
+        }
+        if (opcode == MODIFY_INSTR || !modifiers.isEmpty()) {
+            modifiers.add(Character.toLowerCase(opcode));
+            return;
+        }
+        expr.append(opcode);
+        prevOpcode = opcode;
     }
 
     private boolean shouldIgnore(char opcode) {

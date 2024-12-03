@@ -6,9 +6,11 @@
 </div>
 
 ## Why?
+
 I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`). And if you need to concatenate multiple `Text` objects, it becomes even worse. That's why I've created this library to help people write these kinds of literals easily and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or `HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can make a pull request!
 
 ## Basic syntax
+
 There are a few placeholders that you need to know about:
 - `{}` - Resets the current color and style to the default one.
 - `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
@@ -21,6 +23,7 @@ e.g `${+bi}` - ***bold + italic***.
   - s - ~~strikethrough text~~
 
 ## Installing
+
 You can install this library using Jitpack.io
 
 Add jitpack repository to your `build.gradle`:
@@ -38,6 +41,7 @@ modImplementation("com.github.cattyngmd.catformat:catformat-fabric:1.0.3")
 ```
 
 ## Example
+
 Simple usage with Minecraft's built-in `MutableText`:
 
 ```java
@@ -50,13 +54,13 @@ public static final FabricCatFormat formatter = // you can create only one stati
         new FabricCatFormat().addVanilla();     // of the Formatter and use it everywhere!
 
 void func() {
-  formatter.format("${red} Hello world!"); // red colored 'Hello world!'
-  formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
-  formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'
-  formatter.format("${red+bold} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
+  formatter.format("${red} Hello world!"); // red dev.cattyn.catformat.test.colored 'Hello world!'
+  formatter.format("#{f0f} Hello world!"); // magenta dev.cattyn.catformat.test.colored 'Hello world!'
+  formatter.format("#{0000ff} Hello world!"); // blue dev.cattyn.catformat.test.colored 'Hello world!'
+  formatter.format("${red+bold} Hello {} world!"); // red dev.cattyn.catformat.test.colored 'Hello' with bold style and ' world!' without any style
 
   // It also supports Java's default formatting tool - String.format()
-  formatter.format("${red} Hello %s!", "world"); // red colored 'Hello world!'
+  formatter.format("${red} Hello %s!", "world"); // red dev.cattyn.catformat.test.colored 'Hello world!'
 
   // You can create your own color namespaces too!
   formatter.add("light_green", 0x99FF99);
