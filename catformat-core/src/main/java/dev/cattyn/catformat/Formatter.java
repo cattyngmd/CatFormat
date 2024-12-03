@@ -49,7 +49,9 @@ class Formatter<T> {
                     if (parser != null) {
                         chunk.setLength(chunk.length() - 1);
                     }
-                    core = wrapper.concat(core, build(chunk));
+                    if (canConcat()) {
+                        core = wrapper.concat(core, build(chunk));
+                    }
                     modifiers.clear();
                     continue;
                 }
@@ -75,7 +77,9 @@ class Formatter<T> {
             prevOpcode = c;
         }
 
-        core = wrapper.concat(core, build(chunk));
+        if (canConcat()) {
+            core = wrapper.concat(core, build(chunk));
+        }
         return core;
     }
 
@@ -113,6 +117,10 @@ class Formatter<T> {
         built = wrapper.modify(built, mods);
         chunk.setLength(0);
         return built;
+    }
+
+    private boolean canConcat() {
+        return !chunk.isEmpty();
     }
 
     private Modifiers getModifiers() {
