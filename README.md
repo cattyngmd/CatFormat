@@ -43,6 +43,7 @@ Simple usage with Minecraft's built-in `MutableText`:
 ```java
 import dev.cattyn.catformat.fabric.FabricCatFormat;
 
+import java.awt.*;
 import java.util.Random;
 
 void func() {
@@ -59,9 +60,10 @@ void func() {
 
   // You can create your own color namespaces too!
   formatter.add("light_green", 0x99FF99);
+  formatter.add("pink", Color.PINK.hashCode());
   formatter.add("random_color", () -> new Random().nextInt(0xFFFFFF));
 
-  formatter.format("${light_green} Hello ${random_color} world");
+  formatter.format("${light_green} Hello ${random_color} world ${pink}!");
 }
 ```
 
