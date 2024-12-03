@@ -11,7 +11,7 @@ I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.li
 ## Basic syntax
 There are a few placeholders that you need to know about:
 - `{}` - Resets the current color and style to the default one.
-- `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`).
+- `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
 - `#{}` - Sets the text color to the given hex value (e.g `#{fff}`, `#{ff00ff}`).
 - `+bius` modifiers - Sets the modifier of the text. You can also combine modifiers,
 e.g `${+bi}` - ***bold + italic***.
@@ -46,10 +46,10 @@ import dev.cattyn.catformat.fabric.FabricCatFormat;
 import java.awt.*;
 import java.util.Random;
 
-void func() {
-  FabricCatFormat formatter = new FabricCatFormat();
-  formatter.addVanilla();
+public static final FabricCatFormat formatter = // you can create only one static instance
+        new FabricCatFormat().addVanilla();     // of the Formatter and use it everywhere!
 
+void func() {
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'
   formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
   formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'
