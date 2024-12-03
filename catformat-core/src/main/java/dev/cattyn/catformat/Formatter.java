@@ -39,12 +39,16 @@ class Formatter<T> {
         for (char c : target.toCharArray()) {
             if (shouldIgnore(c))
                 continue;
+            skipSpace = false;
 
             boolean wasExpression = isExpr;
             isExpr = checkExpr(c, isExpr);
             if (isExpr) {
                 if (c == BEGIN_EXPR) {
                     parser = getParser();
+                    if (parser != null) {
+                        chunk.setLength(chunk.length() - 1);
+                    }
                     core = wrapper.concat(core, build(chunk));
                     modifiers.clear();
                     continue;
@@ -77,6 +81,7 @@ class Formatter<T> {
 
     private boolean shouldIgnore(char opcode) {
         if (opcode == ' ' && skipSpace) {
+            skipSpace = false;
             return true;
         }
         if (opcode == '\\' && !isExpr) {
