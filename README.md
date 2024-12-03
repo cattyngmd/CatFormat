@@ -7,6 +7,8 @@
 
 ## Why?
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a06f3082219b435589dbe6e877835742)](https://app.codacy.com/gh/cattyngmd/CatFormat?utm_source=github.com&utm_medium=referral&utm_content=cattyngmd/CatFormat&utm_campaign=Badge_Grade)
+
 I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.literal("Hello " + Formatting.RED + " world!")`). And if you need to concatenate multiple `Text` objects, it becomes even worse. That's why I've created this library to help people write these kinds of literals easily and without any boilerplate code. Also, it doesn't support things like `ClickEvent` or `HoverEvent`, and I'm not planning on adding them in the future. But if you want, you can make a pull request!
 
 ## Basic syntax
