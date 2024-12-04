@@ -47,7 +47,7 @@ Simple usage with Minecraft's built-in `MutableText`:
 ```java
 import dev.cattyn.catformat.fabric.FabricCatFormat;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public static final FabricCatFormat formatter = // you can create only one static instance
@@ -57,7 +57,7 @@ void func() {
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'
   formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
   formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'
-  formatter.format("${red+bold} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
+  formatter.format("${red+b} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
 
   // It also supports Java's default formatting tool - String.format()
   formatter.format("${red} Hello %s!", "world"); // red colored 'Hello world!'
