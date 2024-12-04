@@ -47,7 +47,7 @@ Simple usage with Minecraft's built-in `MutableText`:
 ```java
 import dev.cattyn.catformat.fabric.FabricCatFormat;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public static final FabricCatFormat formatter = // you can create only one static instance
