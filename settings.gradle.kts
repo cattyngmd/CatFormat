@@ -8,5 +8,6 @@ pluginManagement {
     }
 }
 
+include("catformat-legacy-text")
 include("catformat-fabric")
 include("catformat-core")
