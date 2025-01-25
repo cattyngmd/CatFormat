@@ -2,7 +2,7 @@
 <h1>Cat Format</h1> 
 <p> Simple and easy-to-use text formatting tool for Java (primarily made for Minecraft) </p>
 
-![CatFormatIcon](catformat-fabric/src/main/resources/assets/catformat/icon.png)
+![CatFormatIcon](images/icon.png)
 </div>
 
 ## Why?
@@ -15,8 +15,9 @@ There are a few placeholders that you need to know about:
 - `{}` - Resets the current color and style to the default one.
 - `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
 - `#{}` - Sets the text color to the given hex value (e.g `#{fff}`, `#{ff00ff}`).
-- `+bius` modifiers - Sets the modifier of the text. You can also combine modifiers,
+- `+obius` modifiers - Sets the modifier of the text. You can also combine modifiers,
 e.g `${+bi}` - ***bold + italic***.
+  - o - [obfuscated text](images/obfuscated.gif) 
   - b - **bold text** 
   - i - *italic text*
   - u - <ins> underline text </ins>
