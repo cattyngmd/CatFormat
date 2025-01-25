@@ -1,7 +1,9 @@
 package dev.cattyn.catformat.test.content;
 
-import dev.cattyn.catformat.text.Modifiers;
+import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
+
+import java.util.Set;
 
 public class ContentWrapper implements TextWrapper<String> {
     @Override
@@ -15,7 +17,7 @@ public class ContentWrapper implements TextWrapper<String> {
     }
 
     @Override
-    public String modify(String text, Modifiers modifiers) {
+    public String modify(String text, Set<Modifier> modifiers) {
         return text;
     }
 

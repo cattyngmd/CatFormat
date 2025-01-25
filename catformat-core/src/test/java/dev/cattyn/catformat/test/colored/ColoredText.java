@@ -1,24 +1,23 @@
 package dev.cattyn.catformat.test.colored;
 
-import dev.cattyn.catformat.text.Modifiers;
+import dev.cattyn.catformat.text.Modifier;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // simple text object
 public class ColoredText {
     private final List<ColoredText> children = new ArrayList<>();
     private final String content;
 
-    private Modifiers modifiers = new Modifiers();
+    private Set<Modifier> modifiers;
     private int color = -1;
 
     public ColoredText(String content) {
         this.content = content;
+        this.modifiers = EnumSet.noneOf(Modifier.class);
     }
 
-    public ColoredText(String content, Modifiers modifiers, int color) {
+    public ColoredText(String content, Set<Modifier> modifiers, int color) {
         this.content = content;
         this.modifiers = modifiers;
         this.color = color;
@@ -39,7 +38,7 @@ public class ColoredText {
         return children;
     }
 
-    public void setModifiers(Modifiers modifiers) {
+    public void setModifiers(Set<Modifier> modifiers) {
         this.modifiers = modifiers;
     }
 

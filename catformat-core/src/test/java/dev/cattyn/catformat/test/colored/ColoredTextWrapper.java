@@ -1,7 +1,9 @@
 package dev.cattyn.catformat.test.colored;
 
-import dev.cattyn.catformat.text.Modifiers;
+import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
+
+import java.util.Set;
 
 public class ColoredTextWrapper implements TextWrapper<ColoredText> {
     @Override
@@ -17,7 +19,7 @@ public class ColoredTextWrapper implements TextWrapper<ColoredText> {
     }
 
     @Override
-    public ColoredText modify(ColoredText text, Modifiers modifiers) {
+    public ColoredText modify(ColoredText text, Set<Modifier> modifiers) {
         text.setModifiers(modifiers);
         return text;
     }

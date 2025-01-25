@@ -1,6 +1,9 @@
 package dev.cattyn.catformat.utils;
 
 public final class Constants {
+    public static final char ESCAPE = '\\';
+    public static final char BLANK = ' ';
+
     public static final char BEGIN_EXPR = '{';
     public static final char END_EXPR = '}';
 

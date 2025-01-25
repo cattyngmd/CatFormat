@@ -1,5 +1,7 @@
 package dev.cattyn.catformat;
 
+import dev.cattyn.catformat.formatter.FormatEntry;
+import dev.cattyn.catformat.formatter.Formatter;
 import dev.cattyn.catformat.text.TextWrapper;
 
 import java.util.ArrayList;
