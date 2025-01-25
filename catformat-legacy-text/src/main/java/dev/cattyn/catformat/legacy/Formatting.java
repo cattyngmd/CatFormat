@@ -19,9 +19,9 @@ public enum Formatting {
     WHITE("white", 'f'),
     OBFUSCATED("obfuscated", 'k'),
     BOLD("bold", 'l'),
-    ITALIC("italic", 'o'),
-    UNDERLINE("underline", 'n'),
     STRIKETHROUGH("strikethrough", 'm'),
+    UNDERLINE("underline", 'n'),
+    ITALIC("italic", 'o'),
     RESET("reset", 'r');
 
     public static final char COLOR_SIGN = '§';

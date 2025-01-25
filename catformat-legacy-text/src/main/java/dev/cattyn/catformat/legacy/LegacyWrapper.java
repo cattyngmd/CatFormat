@@ -22,7 +22,7 @@ public class LegacyWrapper implements TextWrapper<String> {
     public String modify(String text, Set<Modifier> modifiers) {
         StringBuilder sb = new StringBuilder();
         for (Modifier modifier : modifiers) {
-            int i = Formatting.BOLD.ordinal() + modifier.ordinal();
+            int i = Formatting.OBFUSCATED.ordinal() + modifier.ordinal();
             Formatting formatting = Formatting.fromOrdinal(i);
             if (formatting == null) continue; // ???
             sb.append(formatting.getString());

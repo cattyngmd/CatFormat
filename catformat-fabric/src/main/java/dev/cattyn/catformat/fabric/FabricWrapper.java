@@ -25,6 +25,7 @@ public class FabricWrapper implements TextWrapper<MutableText> {
         if (modifiers.contains(Modifier.ITALIC)) text.formatted(Formatting.ITALIC);
         if (modifiers.contains(Modifier.UNDERLINE)) text.formatted(Formatting.UNDERLINE);
         if (modifiers.contains(Modifier.STRIKETHROUGH)) text.formatted(Formatting.STRIKETHROUGH);
+        if (modifiers.contains(Modifier.OBFUSCATED)) text.formatted(Formatting.OBFUSCATED);
         return text;
     }
 

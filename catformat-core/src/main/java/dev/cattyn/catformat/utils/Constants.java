@@ -16,6 +16,7 @@ public final class Constants {
     public static final char ITALIC_MOD = 'i';
     public static final char UNDERLINE_MOD = 'u';
     public static final char STRIKETHROUGH_MOD = 's';
+    public static final char OBFUSCATED_MOD = 'o';
 
     public static boolean isExprBracket(char c) {
         return c == BEGIN_EXPR || c == END_EXPR;
