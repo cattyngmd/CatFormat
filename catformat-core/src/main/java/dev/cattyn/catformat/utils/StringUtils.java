@@ -1,6 +1,6 @@
 package dev.cattyn.catformat.utils;
 
-public class StringUtils {
+public final class StringUtils {
     private StringUtils() {
         throw new AssertionError();
     }

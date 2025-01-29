@@ -2,6 +2,8 @@ package dev.cattyn.catformat;
 
 import dev.cattyn.catformat.formatter.FormatEntry;
 import dev.cattyn.catformat.formatter.Formatter;
+import dev.cattyn.catformat.stylist.Stylist;
+import dev.cattyn.catformat.stylist.impl.ClassStylist;
 import dev.cattyn.catformat.text.TextWrapper;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ public class CatFormat<T> {
     private final List<FormatEntry> formats = new ArrayList<>();
     private final TextWrapper<T> wrapper;
 
+    private Stylist<?> stylist = new ClassStylist();
+
     public CatFormat(TextWrapper<T> wrapper) {
         this.wrapper = wrapper;
     }
@@ -23,6 +27,11 @@ public class CatFormat<T> {
                 return format;
         }
         return NULL_FORMAT;
+    }
+
+    public CatFormat<T> add(Object o) {
+        formats.addAll(stylist.getEntries0(o));
+        return this;
     }
 
     public CatFormat<T> add(String name, int color) {
@@ -40,6 +49,11 @@ public class CatFormat<T> {
 
     public T format(String s) {
         return new Formatter<>(this, s).handle();
+    }
+
+    public CatFormat<T> stylist(Stylist<?> stylist) {
+        this.stylist = stylist;
+        return this;
     }
 
     public TextWrapper<T> getWrapper() {
