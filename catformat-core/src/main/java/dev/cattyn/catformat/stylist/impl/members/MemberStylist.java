@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public abstract class MemberStylist<T extends Member & AnnotatedElement> implements Stylist<T[]> {
+    protected final Object parent;
+
+    protected MemberStylist(Object parent) {
+        this.parent = parent;
+    }
+
     @Override
     public List<FormatEntry> getEntries(T[] members) {
         List<FormatEntry> entries = new ArrayList<>();
@@ -35,6 +41,7 @@ public abstract class MemberStylist<T extends Member & AnnotatedElement> impleme
     public abstract Supplier<Integer> getColorSupplier(T member);
 
     protected boolean isInvalid(T member) {
+        if (parent != null) return false;
         return !ReflectionUtils.isStatic(member);
     }
 

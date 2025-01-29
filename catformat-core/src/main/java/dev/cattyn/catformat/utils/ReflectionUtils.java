@@ -20,18 +20,24 @@ public final class ReflectionUtils {
         return Modifier.isFinal(field.getModifiers());
     }
 
-    public static void accessStatic(AccessibleObject object) {
-        if (!object.canAccess(null)) {
-            object.setAccessible(true);
+    public static void access(AccessibleObject object, Object obj) {
+        if (object.canAccess(obj)) {
+            return;
         }
+
+        object.setAccessible(true);
     }
 
     public static VarHandle unreflect(Field field) {
         try {
-            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            MethodHandles.Lookup lookup = lookup(field);
             return lookup.unreflectVarHandle(field);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static MethodHandles.Lookup lookup(Member member) throws IllegalAccessException {
+        return MethodHandles.privateLookupIn(member.getDeclaringClass(), MethodHandles.lookup());
     }
 }

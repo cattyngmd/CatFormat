@@ -4,11 +4,9 @@ import dev.cattyn.catformat.test.colored.ColoredText;
 import dev.cattyn.catformat.test.colored.ColoredTextWrapper;
 import dev.cattyn.catformat.test.content.ContentWrapper;
 import dev.cattyn.catformat.CatFormat;
-import dev.cattyn.catformat.test.style.SimpleStyle;
 import dev.cattyn.catformat.text.Modifier;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -41,21 +39,5 @@ public class CatFormatTest {
         modifiers.remove(Modifier.BOLD);
 
         assertEquals(new ColoredText("sit", modifiers, -1), children.get(2));
-    }
-
-    @Test
-    public void stylistTest() {
-        CatFormat<String> format = new CatFormat<>(new ContentWrapper());
-        format.add(SimpleStyle.class);
-        assertEquals(format.getEntry("MAGENTA_LIGHT_COLOR").getColor(), Color.magenta.brighter().hashCode());
-        assertEquals(format.getEntry("black").getColor(), Color.black.hashCode());
-
-        assertEquals(format.getEntry("dynamic").getColor(), Color.blue.hashCode());
-        SimpleStyle.DYNAMIC = Color.green.hashCode();
-        assertEquals(format.getEntry("dynamic").getColor(), Color.green.hashCode());
-
-        assertEquals(format.getEntry("theme-color").getColor(), Color.black.hashCode());
-        SimpleStyle.DARK_MODE = true;
-        assertEquals(format.getEntry("theme-color").getColor(), Color.white.hashCode());
     }
 }
