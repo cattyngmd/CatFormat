@@ -12,6 +12,7 @@ I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.li
 ## Basic syntax
 
 There are a few placeholders that you need to know about:
+
 - `{}` - Resets the current color and style to the default one.
 - `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
 - `#{}` - Sets the text color to the given hex value (e.g `#{fff}`, `#{ff00ff}`).
@@ -34,11 +35,11 @@ maven { url "https://jitpack.io"  }
 
 And then add CatFormat as a dependency:
 ```gradle
-implementation("com.github.cattyngmd.catformat:catformat-core:1.1.0")
+implementation("com.github.cattyngmd.catformat:catformat-core:1.2.0")
 ```
 Or if you use fabric
 ```gradle
-modImplementation("com.github.cattyngmd.catformat:catformat-fabric:1.1.0")
+modImplementation("com.github.cattyngmd.catformat:catformat-fabric:1.2.0")
 ```
 
 ## Example
@@ -69,6 +70,34 @@ void func() {
   formatter.add("random_color", () -> new Random().nextInt(0xFFFFFF));
 
   formatter.format("${light_green} Hello ${random_color} world ${pink}!");
+}
+```
+
+Also, you can use classes with colors and use them in your CatFormat string:
+
+```java
+import dev.cattyn.catformat.stylist.annotations.*;
+import java.awt.*;
+
+class Styles {
+    // Mark your color with final keyword if you are not
+    // going to change it, because it parses a bit faster
+    @Style 
+    final int black = Color.BLACK.hashCode();
+  
+    // You can also use `value` property in @Style
+    // to set custom name to the color
+    @Style("custom_name")
+    final int red = Color.RED.hashCode();
+    
+    @Style("dynamic_color")
+    int dynamic = Color.CYAN.hashCode();
+    
+    // And of course functions :p
+    @Style("random")
+    int getRandomColor() { // Beware, you cant pass any params
+        return new Random().nextInt(0xFFFFFF);
+    }
 }
 ```
 
