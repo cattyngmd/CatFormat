@@ -1,9 +1,9 @@
 package dev.cattyn.catformat.formatter;
 
 import dev.cattyn.catformat.CatFormat;
-import dev.cattyn.catformat.parsers.HexParser;
-import dev.cattyn.catformat.parsers.Parser;
-import dev.cattyn.catformat.parsers.NameParser;
+import dev.cattyn.catformat.parser.HexParser;
+import dev.cattyn.catformat.parser.Parser;
+import dev.cattyn.catformat.parser.NameParser;
 import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
 import dev.cattyn.catformat.utils.StringUtils;

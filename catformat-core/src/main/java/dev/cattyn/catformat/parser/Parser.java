@@ -1,4 +1,4 @@
-package dev.cattyn.catformat.parsers;
+package dev.cattyn.catformat.parser;
 
 import dev.cattyn.catformat.CatFormat;
 
