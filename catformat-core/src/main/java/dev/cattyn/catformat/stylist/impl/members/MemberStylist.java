@@ -17,10 +17,8 @@ public abstract class MemberStylist<T extends Member & AnnotatedElement> impleme
         List<FormatEntry> entries = new ArrayList<>();
         for (T member : members) {
             Style style = member.getAnnotation(Style.class);
-            if (style == null)
-                continue;
 
-            if (isInvalid(member))
+            if (style == null || isInvalid(member))
                 continue;
 
             Supplier<Integer> supplier = getColorSupplier(member);
