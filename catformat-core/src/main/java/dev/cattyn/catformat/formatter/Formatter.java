@@ -17,7 +17,8 @@ import static dev.cattyn.catformat.utils.Constants.*;
 public class Formatter<T> {
     private static final Map<Character, Parser> PARSER_MAP = Map.of(
             HEX_TYPE, new HexParser(),
-            NAME_TYPE, new NameParser()
+            NAME_TYPE, new NameParser(),
+            NAME_TYPE_ALT, new NameParser()
     );
 
     private final Set<Modifier> modifiers = EnumSet.noneOf(Modifier.class);

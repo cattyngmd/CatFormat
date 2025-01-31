@@ -9,6 +9,7 @@ public final class Constants {
 
     public static final char HEX_TYPE = '#';
     public static final char NAME_TYPE = '$';
+    public static final char NAME_TYPE_ALT = '@';
 
     public static final char MODIFY_INSTR = '+';
 
