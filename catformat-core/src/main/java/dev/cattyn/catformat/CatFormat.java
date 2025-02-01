@@ -2,12 +2,15 @@ package dev.cattyn.catformat;
 
 import dev.cattyn.catformat.entry.EntryContainer;
 import dev.cattyn.catformat.entry.FormatEntry;
+import dev.cattyn.catformat.text.TextWrapper;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface CatFormat<T> {
     EntryContainer entries();
+
+    TextWrapper<T> wrapper();
 
     T format(String s);
 
