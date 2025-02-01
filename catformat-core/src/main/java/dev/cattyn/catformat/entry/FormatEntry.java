@@ -1,4 +1,4 @@
-package dev.cattyn.catformat.formatter;
+package dev.cattyn.catformat.entry;
 
 import java.util.function.Supplier;
 
