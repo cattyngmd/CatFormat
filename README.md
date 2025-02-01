@@ -52,8 +52,8 @@ import dev.cattyn.catformat.fabric.FabricCatFormat;
 import java.awt.Color;
 import java.util.Random;
 
-FabricCatFormat formatter =                 // you can create only one static instance
-        new FabricCatFormat().addVanilla(); // of the Formatter and use it everywhere!
+// you can create only one static instance of the Formatter and use it everywhere!
+FabricCatFormat formatter = new FabricCatFormat();
 
 void main() {
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'

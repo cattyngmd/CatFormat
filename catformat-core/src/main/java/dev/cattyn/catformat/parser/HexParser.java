@@ -1,10 +1,10 @@
 package dev.cattyn.catformat.parser;
 
-import dev.cattyn.catformat.CatFormat;
+import dev.cattyn.catformat.entry.EntryContainer;
 
 public class HexParser implements Parser {
     @Override
-    public int getColor(CatFormat<?> format, String expr) {
+    public int getColor(EntryContainer entries, String expr) {
         if (expr.length() == 3) {
             // css color support
             char[] c = expr.toCharArray();

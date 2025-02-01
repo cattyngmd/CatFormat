@@ -1,6 +1,6 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
-import dev.cattyn.catformat.formatter.FormatEntry;
+import dev.cattyn.catformat.entry.FormatEntry;
 import dev.cattyn.catformat.stylist.Stylist;
 import dev.cattyn.catformat.stylist.annotations.Style;
 import dev.cattyn.catformat.stylist.wrappers.ColorWrapper;

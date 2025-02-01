@@ -1,11 +1,11 @@
-package dev.cattyn.catformat.formatter;
+package dev.cattyn.catformat;
 
-import dev.cattyn.catformat.CatFormat;
 import dev.cattyn.catformat.parser.HexParser;
 import dev.cattyn.catformat.parser.Parser;
 import dev.cattyn.catformat.parser.NameParser;
 import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
+import dev.cattyn.catformat.utils.ChunkType;
 import dev.cattyn.catformat.utils.StringUtils;
 
 import java.util.EnumSet;
@@ -26,7 +26,7 @@ public class Formatter<T> {
     private final StringBuilder expr = new StringBuilder();
     private final StringBuilder chunk = new StringBuilder();
 
-    private final CatFormat<T> catFormat;
+    private final CatFormatImpl<T> catFormat;
     private final String target;
     private final TextWrapper<T> wrapper;
     private ChunkType type = ChunkType.TEXT;
@@ -37,7 +37,7 @@ public class Formatter<T> {
 
     private char lastOpcode;
 
-    public Formatter(CatFormat<T> catFormat, String target) {
+    public Formatter(CatFormatImpl<T> catFormat, String target) {
         this.catFormat = catFormat;
         this.target = target;
         this.wrapper = catFormat.getWrapper();
@@ -128,7 +128,7 @@ public class Formatter<T> {
         type = ChunkType.ESCAPE;
 
         if (colored()) {
-            color = parser.getColor(catFormat, expr.toString());
+            color = parser.getColor(catFormat.entries(), expr.toString());
         }
         StringUtils.clear(expr);
         return true;
