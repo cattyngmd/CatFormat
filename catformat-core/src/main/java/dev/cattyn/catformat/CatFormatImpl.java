@@ -17,11 +17,12 @@ public class CatFormatImpl<T> implements CatFormat<T> {
         return container;
     }
 
-    public T format(String s) {
-        return new Formatter<>(this, s).handle();
+    @Override
+    public TextWrapper<T> wrapper() {
+        return wrapper;
     }
 
-    public TextWrapper<T> getWrapper() {
-        return wrapper;
+    public T format(String s) {
+        return new Formatter<>(this, s).handle();
     }
 }

@@ -40,7 +40,7 @@ public class Formatter<T> {
     public Formatter(CatFormatImpl<T> catFormat, String target) {
         this.catFormat = catFormat;
         this.target = target;
-        this.wrapper = catFormat.getWrapper();
+        this.wrapper = catFormat.wrapper();
         this.core = this.wrapper.newText();
     }
 
