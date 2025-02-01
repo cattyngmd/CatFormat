@@ -11,7 +11,7 @@ public class NonStaticStyle {
     int MAGENTA_LIGHT_COLOR = Color.magenta.brighter().hashCode();
 
     @Style("black")
-    int BLACK_COLOR = Color.black.hashCode();
+    Color BLACK_COLOR = Color.black;
 
     @Style("dynamic")
     public int dynamic = Color.blue.hashCode();

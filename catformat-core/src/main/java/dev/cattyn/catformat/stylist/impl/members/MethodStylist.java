@@ -12,7 +12,7 @@ public final class MethodStylist extends MemberStylist<Method> {
     }
 
     @Override
-    public Supplier<Integer> getColorSupplier(Method member) {
+    public Supplier<?> getColorSupplier(Method member) {
         access(member, parent);
         try {
             MethodHandles.Lookup lookup = lookup(member);
@@ -38,16 +38,21 @@ public final class MethodStylist extends MemberStylist<Method> {
     }
 
     @Override
+    public Class<?> getReturnType(Method member) {
+        return member.getReturnType();
+    }
+
+    @Override
     protected boolean isInvalid(Method member) {
         if (member.getParameterCount() != 0) return true;
         return super.isInvalid(member);
     }
 
-    private Supplier<Integer> buildSupplier(MethodHandle handle, boolean isStatic)
+    private Supplier<?> buildSupplier(MethodHandle handle, boolean isStatic)
             throws Throwable {
         if (isStatic) {
-            return (Supplier<Integer>) handle.invokeExact();
+            return (Supplier<?>) handle.invokeExact();
         }
-        return (Supplier<Integer>) handle.bindTo(parent).invokeExact();
+        return (Supplier<?>) handle.bindTo(parent).invokeExact();
     }
 }

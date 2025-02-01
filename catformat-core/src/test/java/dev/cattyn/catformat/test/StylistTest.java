@@ -2,6 +2,7 @@ package dev.cattyn.catformat.test;
 
 import dev.cattyn.catformat.CatFormat;
 import dev.cattyn.catformat.test.content.ContentWrapper;
+import dev.cattyn.catformat.test.style.IllegalStyle;
 import dev.cattyn.catformat.test.style.NonStaticStyle;
 import dev.cattyn.catformat.test.style.SimpleStyle;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,16 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StylistTest {
+    @Test
+    public void illegalStyleTest() {
+        CatFormat<String> format = new CatFormat<>(new ContentWrapper());
+        assertThrows(IllegalArgumentException.class,
+                () -> format.add(new IllegalStyle()));
+    }
+
     @Test
     public void stylistTest() {
         CatFormat<String> format = new CatFormat<>(new ContentWrapper());
