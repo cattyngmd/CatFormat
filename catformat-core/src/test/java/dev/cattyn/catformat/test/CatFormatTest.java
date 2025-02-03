@@ -20,7 +20,7 @@ public class CatFormatTest {
         CatFormat<String> format = new CatFormatImpl<>(new ContentWrapper());
         format.add("red", 0xff0000);
         format.add("blue", 0x0000ff);
-        String result = format.format("${red} Lorem ipsum dolor sit ${blue} amet, consectetur adipiscing {}elit{}");
+        String result = format.format("{red} Lorem ipsum dolor sit {blue} amet, consectetur adipiscing {}elit{}");
         assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit", result);
     }
 
@@ -29,7 +29,7 @@ public class CatFormatTest {
         CatFormat<ColoredText> format = new CatFormatImpl<>(new ColoredTextWrapper());
         format.add("red", 0xff0000);
         format.add("blue", 0x0000ff);
-        ColoredText result = format.format("${red} Lorem ipsum ${blue+b} dolor {} sit");
+        ColoredText result = format.format("{#f00} Lorem ipsum {blue+b} dolor {} sit");
         List<ColoredText> children = result.getChildren();
         EnumSet<Modifier> modifiers = EnumSet.noneOf(Modifier.class);
 

@@ -65,19 +65,13 @@ public class Formatter<T> {
             return;
         }
 
-        // garbage begin
         if (opcode == BEGIN_EXPR) {
-            Parser parser = PARSER_MAP.get(lastOpcode);
             type = ChunkType.EXPR;
-            if (parser != null) {
-                StringUtils.shrink(chunk);
-            }
             concat();
             modifiers.clear();
-            this.parser = parser;
+            parser = null;
             return;
         }
-        // garbage end
 
         chunk.append(opcode);
     }
@@ -90,6 +84,16 @@ public class Formatter<T> {
 
         if (endExpr(opcode)) {
             return;
+        }
+
+        if (lastOpcode == BEGIN_EXPR
+                && opcode == HEX_TYPE) {
+            parser = new HexParser();
+            return;
+        }
+
+        if (parser == null) {
+            parser = new NameParser();
         }
 
         expr.append(opcode);
