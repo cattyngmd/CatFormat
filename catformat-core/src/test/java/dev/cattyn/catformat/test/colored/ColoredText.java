@@ -9,15 +9,15 @@ public class ColoredText {
     private final List<ColoredText> children = new ArrayList<>();
     private final String content;
 
-    private Set<Modifier> modifiers;
+    private int modifiers;
     private int color = -1;
 
     public ColoredText(String content) {
         this.content = content;
-        this.modifiers = EnumSet.noneOf(Modifier.class);
+        this.modifiers = 0;
     }
 
-    public ColoredText(String content, Set<Modifier> modifiers, int color) {
+    public ColoredText(String content, int modifiers, int color) {
         this.content = content;
         this.modifiers = modifiers;
         this.color = color;
@@ -38,7 +38,7 @@ public class ColoredText {
         return children;
     }
 
-    public void setModifiers(Set<Modifier> modifiers) {
+    public void setModifiers(int modifiers) {
         this.modifiers = modifiers;
     }
 

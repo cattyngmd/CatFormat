@@ -1,7 +1,7 @@
 package dev.cattyn.catformat.parser;
 
-import dev.cattyn.catformat.CatFormat;
+import dev.cattyn.catformat.entry.EntryContainer;
 
 public interface Parser {
-    int getColor(CatFormat<?> format, String expr);
+    int getColor(EntryContainer entries, String expr);
 }

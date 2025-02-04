@@ -11,6 +11,8 @@ public enum Modifier {
     UNDERLINE,
     ITALIC;
 
+    private final int flag = 1 << ordinal();
+
     public static Optional<Modifier> from(char c) {
         return Optional.ofNullable(switch (c) {
             case OBFUSCATED_MOD ->      OBFUSCATED;
@@ -20,5 +22,25 @@ public enum Modifier {
             case ITALIC_MOD ->          ITALIC;
             default -> null;
         });
+    }
+
+    public static int asBits(Modifier... modifiers) {
+        int mod = 0;
+        for (Modifier m : modifiers) {
+            mod = m.with(mod);
+        }
+        return mod;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public boolean isIn(int flags) {
+        return (flags & getFlag()) > 0;
+    }
+
+    public int with(int flags) {
+        return flags | getFlag();
     }
 }

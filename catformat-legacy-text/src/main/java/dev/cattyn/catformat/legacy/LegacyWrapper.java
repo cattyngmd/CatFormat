@@ -3,8 +3,6 @@ package dev.cattyn.catformat.legacy;
 import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
 
-import java.util.Set;
-
 public class LegacyWrapper implements TextWrapper<String> {
     @Override
     public String colored(String text, int color) {
@@ -19,12 +17,14 @@ public class LegacyWrapper implements TextWrapper<String> {
     }
 
     @Override
-    public String modify(String text, Set<Modifier> modifiers) {
+    public String modify(String text, int modifiers) {
         StringBuilder sb = new StringBuilder();
-        for (Modifier modifier : modifiers) {
+
+        for (Modifier modifier : Modifier.values()) {
             int i = Formatting.OBFUSCATED.ordinal() + modifier.ordinal();
             Formatting formatting = Formatting.fromOrdinal(i);
-            if (formatting == null) continue; // ???
+            if (!modifier.isIn(modifiers) || formatting == null)
+                continue;
             sb.append(formatting.getString());
         }
         sb.append(text);

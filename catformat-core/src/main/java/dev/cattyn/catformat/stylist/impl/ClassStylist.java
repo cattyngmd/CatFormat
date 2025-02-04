@@ -1,6 +1,6 @@
 package dev.cattyn.catformat.stylist.impl;
 
-import dev.cattyn.catformat.formatter.FormatEntry;
+import dev.cattyn.catformat.entry.FormatEntry;
 import dev.cattyn.catformat.stylist.Stylist;
 import dev.cattyn.catformat.stylist.impl.members.FieldStylist;
 import dev.cattyn.catformat.stylist.impl.members.MethodStylist;

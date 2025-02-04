@@ -1,16 +1,15 @@
-package dev.cattyn.catformat.formatter;
+package dev.cattyn.catformat;
 
-import dev.cattyn.catformat.CatFormat;
 import dev.cattyn.catformat.parser.HexParser;
 import dev.cattyn.catformat.parser.Parser;
 import dev.cattyn.catformat.parser.NameParser;
 import dev.cattyn.catformat.text.Modifier;
 import dev.cattyn.catformat.text.TextWrapper;
+import dev.cattyn.catformat.utils.ChunkType;
 import dev.cattyn.catformat.utils.StringUtils;
 
 import java.util.EnumSet;
 import java.util.Map;
-import java.util.Set;
 
 import static dev.cattyn.catformat.utils.Constants.*;
 
@@ -21,12 +20,10 @@ public class Formatter<T> {
             NAME_TYPE_ALT, new NameParser()
     );
 
-    private final Set<Modifier> modifiers = EnumSet.noneOf(Modifier.class);
-
     private final StringBuilder expr = new StringBuilder();
     private final StringBuilder chunk = new StringBuilder();
 
-    private final CatFormat<T> catFormat;
+    private final CatFormatImpl<T> catFormat;
     private final String target;
     private final TextWrapper<T> wrapper;
     private ChunkType type = ChunkType.TEXT;
@@ -34,13 +31,14 @@ public class Formatter<T> {
 
     private Parser parser = null;
     private int color = 0xFFFFFF;
+    private int modifiers = 0;
 
     private char lastOpcode;
 
-    public Formatter(CatFormat<T> catFormat, String target) {
+    public Formatter(CatFormatImpl<T> catFormat, String target) {
         this.catFormat = catFormat;
         this.target = target;
-        this.wrapper = catFormat.getWrapper();
+        this.wrapper = catFormat.wrapper();
         this.core = this.wrapper.newText();
     }
 
@@ -65,19 +63,13 @@ public class Formatter<T> {
             return;
         }
 
-        // garbage begin
         if (opcode == BEGIN_EXPR) {
-            Parser parser = PARSER_MAP.get(lastOpcode);
             type = ChunkType.EXPR;
-            if (parser != null) {
-                StringUtils.shrink(chunk);
-            }
             concat();
-            modifiers.clear();
-            this.parser = parser;
+            modifiers = 0;
+            parser = null;
             return;
         }
-        // garbage end
 
         chunk.append(opcode);
     }
@@ -92,6 +84,16 @@ public class Formatter<T> {
             return;
         }
 
+        if (lastOpcode == BEGIN_EXPR
+                && opcode == HEX_TYPE) {
+            parser = new HexParser();
+            return;
+        }
+
+        if (parser == null) {
+            parser = new NameParser();
+        }
+
         expr.append(opcode);
     }
 
@@ -100,7 +102,7 @@ public class Formatter<T> {
             return;
         }
 
-        Modifier.from(opcode).ifPresent(modifiers::add);
+        Modifier.from(opcode).ifPresent(mod -> modifiers = mod.with(modifiers));
     }
 
     private void handleEscape(char opcode) {
@@ -128,7 +130,7 @@ public class Formatter<T> {
         type = ChunkType.ESCAPE;
 
         if (colored()) {
-            color = parser.getColor(catFormat, expr.toString());
+            color = parser.getColor(catFormat.entries(), expr.toString());
         }
         StringUtils.clear(expr);
         return true;
@@ -139,7 +141,7 @@ public class Formatter<T> {
         if (colored()) {
             built = wrapper.colored(built, color);
         }
-        built = wrapper.modify(built, EnumSet.copyOf(modifiers));
+        built = wrapper.modify(built, modifiers);
         StringUtils.clear(chunk);
         return built;
     }

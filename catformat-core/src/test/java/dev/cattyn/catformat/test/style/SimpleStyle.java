@@ -11,7 +11,7 @@ public class SimpleStyle {
     static final int MAGENTA_LIGHT_COLOR = Color.magenta.brighter().hashCode();
 
     @Style("black")
-    static final int BLACK_COLOR = Color.black.hashCode();
+    static final Color BLACK_COLOR = Color.black;
 
     @Style("dynamic")
     public static int DYNAMIC = Color.blue.hashCode();

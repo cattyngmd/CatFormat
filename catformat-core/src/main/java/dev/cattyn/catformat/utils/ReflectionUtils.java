@@ -20,6 +20,10 @@ public final class ReflectionUtils {
         return Modifier.isFinal(field.getModifiers());
     }
 
+    public static boolean isInteger(Class<?> klass) {
+        return int.class == klass || Integer.class == klass;
+    }
+
     public static void access(AccessibleObject object, Object obj) {
         if (object.canAccess(obj)) {
             return;

@@ -12,7 +12,7 @@ public final class FieldStylist extends MemberStylist<Field> {
     }
 
     @Override
-    public Supplier<Integer> getColorSupplier(Field member) {
+    public Supplier<?> getColorSupplier(Field member) {
         access(member, parent);
         if (isFinal(member)) {
             return immutable(member);
@@ -20,19 +20,24 @@ public final class FieldStylist extends MemberStylist<Field> {
         return mutable(member);
     }
 
-    private Supplier<Integer> immutable(Field field) {
+    @Override
+    public Class<?> getReturnType(Field member) {
+        return member.getType();
+    }
+
+    private Supplier<?> immutable(Field field) {
         try {
             Object o = field.get(parent);
-            return () -> (Integer) o;
+            return () -> o;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Supplier<Integer> mutable(Field field) {
+    private Supplier<?> mutable(Field field) {
         VarHandle handle = unreflect(field);
         if (parent != null)
-            return () -> (Integer) handle.get(parent);
-        return () -> (Integer) handle.get();
+            return () -> handle.get(parent);
+        return handle::get;
     }
 }

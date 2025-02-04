@@ -1,10 +1,10 @@
 package dev.cattyn.catformat.parser;
 
-import dev.cattyn.catformat.CatFormat;
+import dev.cattyn.catformat.entry.EntryContainer;
 
 public class NameParser implements Parser {
     @Override
-    public int getColor(CatFormat<?> format, String expr) {
-        return format.getEntry(expr).getColor();
+    public int getColor(EntryContainer entries, String expr) {
+        return entries.get(expr).getColor();
     }
 }
