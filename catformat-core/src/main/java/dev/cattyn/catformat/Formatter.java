@@ -10,7 +10,6 @@ import dev.cattyn.catformat.utils.StringUtils;
 
 import java.util.EnumSet;
 import java.util.Map;
-import java.util.Set;
 
 import static dev.cattyn.catformat.utils.Constants.*;
 
@@ -20,8 +19,6 @@ public class Formatter<T> {
             NAME_TYPE, new NameParser(),
             NAME_TYPE_ALT, new NameParser()
     );
-
-    private final Set<Modifier> modifiers = EnumSet.noneOf(Modifier.class);
 
     private final StringBuilder expr = new StringBuilder();
     private final StringBuilder chunk = new StringBuilder();
@@ -34,6 +31,7 @@ public class Formatter<T> {
 
     private Parser parser = null;
     private int color = 0xFFFFFF;
+    private int modifiers = 0;
 
     private char lastOpcode;
 
@@ -68,7 +66,7 @@ public class Formatter<T> {
         if (opcode == BEGIN_EXPR) {
             type = ChunkType.EXPR;
             concat();
-            modifiers.clear();
+            modifiers = 0;
             parser = null;
             return;
         }
@@ -104,7 +102,7 @@ public class Formatter<T> {
             return;
         }
 
-        Modifier.from(opcode).ifPresent(modifiers::add);
+        Modifier.from(opcode).ifPresent(mod -> modifiers = mod.with(modifiers));
     }
 
     private void handleEscape(char opcode) {
@@ -143,7 +141,7 @@ public class Formatter<T> {
         if (colored()) {
             built = wrapper.colored(built, color);
         }
-        built = wrapper.modify(built, EnumSet.copyOf(modifiers));
+        built = wrapper.modify(built, modifiers);
         StringUtils.clear(chunk);
         return built;
     }
