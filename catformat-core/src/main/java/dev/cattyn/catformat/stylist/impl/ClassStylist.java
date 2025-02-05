@@ -4,6 +4,7 @@ import dev.cattyn.catformat.entry.FormatEntry;
 import dev.cattyn.catformat.stylist.ColorStylist;
 import dev.cattyn.catformat.stylist.impl.members.FieldStylist;
 import dev.cattyn.catformat.stylist.impl.members.MethodStylist;
+import dev.cattyn.catformat.stylist.wrappers.AwtWrapper;
 import dev.cattyn.catformat.stylist.wrappers.ColorWrapper;
 
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ import java.util.List;
 
 public class ClassStylist implements ColorStylist<Object> {
     private final List<ColorWrapper<?>> wrappers = new ArrayList<>();
+
+    public ClassStylist() {
+        wrappers.add(new AwtWrapper());
+    }
 
     @Override
     public List<FormatEntry> getEntries(Object target) {
