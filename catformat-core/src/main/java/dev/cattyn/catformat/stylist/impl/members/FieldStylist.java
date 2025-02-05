@@ -1,5 +1,7 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
+import dev.cattyn.catformat.stylist.ColorStylist;
+
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.util.function.Supplier;
@@ -7,8 +9,8 @@ import java.util.function.Supplier;
 import static dev.cattyn.catformat.utils.ReflectionUtils.*;
 
 public final class FieldStylist extends MemberStylist<Field> {
-    public FieldStylist(Object parent) {
-        super(parent);
+    public FieldStylist(ColorStylist<?> stylist, Object parent) {
+        super(stylist, parent);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
 import dev.cattyn.catformat.entry.FormatEntry;
+import dev.cattyn.catformat.stylist.ColorStylist;
 import dev.cattyn.catformat.stylist.Stylist;
 import dev.cattyn.catformat.stylist.annotations.Style;
 import dev.cattyn.catformat.stylist.wrappers.ColorWrapper;
@@ -15,9 +16,11 @@ import java.util.function.Supplier;
 import static dev.cattyn.catformat.utils.ReflectionUtils.isInteger;
 
 public abstract class MemberStylist<T extends Member & AnnotatedElement> implements Stylist<T[]> {
+    protected final ColorStylist<?> stylist;
     protected final Object parent;
 
-    protected MemberStylist(Object parent) {
+    protected MemberStylist(ColorStylist<?> stylist, Object parent) {
+        this.stylist = stylist;
         this.parent = parent;
     }
 
@@ -62,13 +65,7 @@ public abstract class MemberStylist<T extends Member & AnnotatedElement> impleme
     private ColorWrapper<?> getWrapper(Class<?> klass) {
         if (isInteger(klass)) return null;
 
-        for (ColorWrapper<?> wrapper : Stylist.WRAPPERS) {
-            if (wrapper.getType().isAssignableFrom(klass)) {
-                return wrapper;
-            }
-        }
-
-        throw new IllegalArgumentException("Color wrapper for class %s not found!".formatted(klass));
+        return stylist.getColor(klass);
     }
 
     private FormatEntry buildEntry(String name, Supplier<?> object, ColorWrapper<?> wrapper) {

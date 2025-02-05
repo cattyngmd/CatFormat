@@ -1,5 +1,7 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
+import dev.cattyn.catformat.stylist.ColorStylist;
+
 import java.lang.invoke.*;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
@@ -7,8 +9,8 @@ import java.util.function.Supplier;
 import static dev.cattyn.catformat.utils.ReflectionUtils.*;
 
 public final class MethodStylist extends MemberStylist<Method> {
-    public MethodStylist(Object parent) {
-        super(parent);
+    public MethodStylist(ColorStylist<?> stylist, Object parent) {
+        super(stylist, parent);
     }
 
     @Override
