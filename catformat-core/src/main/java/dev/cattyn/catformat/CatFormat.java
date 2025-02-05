@@ -1,62 +1,40 @@
 package dev.cattyn.catformat;
 
-import dev.cattyn.catformat.formatter.FormatEntry;
-import dev.cattyn.catformat.formatter.Formatter;
-import dev.cattyn.catformat.stylist.Stylist;
-import dev.cattyn.catformat.stylist.impl.ClassStylist;
+import dev.cattyn.catformat.entry.EntryContainer;
+import dev.cattyn.catformat.entry.FormatEntry;
 import dev.cattyn.catformat.text.TextWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CatFormat<T> {
-    private static final FormatEntry NULL_FORMAT = new FormatEntry("null", () -> -1);
-    private final List<FormatEntry> formats = new ArrayList<>();
-    private final TextWrapper<T> wrapper;
+public interface CatFormat<T> {
+    EntryContainer entries();
 
-    private Stylist<?> stylist = new ClassStylist();
+    TextWrapper<T> wrapper();
 
-    public CatFormat(TextWrapper<T> wrapper) {
-        this.wrapper = wrapper;
+    T format(String s);
+
+    default T format(String s, Object... o) {
+        return format(s.formatted(o));
     }
 
-    public FormatEntry getEntry(String name) {
-        for (FormatEntry format : formats) {
-            if (format.name().equalsIgnoreCase(name))
-                return format;
-        }
-        return NULL_FORMAT;
-    }
-
-    public CatFormat<T> add(Object o) {
-        formats.addAll(stylist.getEntries0(o));
+    default CatFormat<T> styled(Consumer<EntryContainer> consumer) {
+        consumer.accept(entries());
         return this;
     }
 
-    public CatFormat<T> add(String name, int color) {
+    default CatFormat<T> add(String name, Supplier<Integer> color) {
+        entries().add(new FormatEntry(name, color));
+        return this;
+    }
+
+    default CatFormat<T> add(Object o) {
+        EntryContainer entries = entries();
+        entries.stylist().getEntries0(o).forEach(entries::add);
+        return this;
+    }
+
+    default CatFormat<T> add(String name, int color) {
         return add(name, () -> color);
-    }
-
-    public CatFormat<T> add(String name, Supplier<Integer> color) {
-        formats.add(new FormatEntry(name, color));
-        return this;
-    }
-
-    public T format(String s, Object... objects) {
-        return format(s.formatted(objects));
-    }
-
-    public T format(String s) {
-        return new Formatter<>(this, s).handle();
-    }
-
-    public CatFormat<T> stylist(Stylist<?> stylist) {
-        this.stylist = stylist;
-        return this;
-    }
-
-    public TextWrapper<T> getWrapper() {
-        return wrapper;
     }
 }

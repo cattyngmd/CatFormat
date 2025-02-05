@@ -17,7 +17,7 @@ public class ContentWrapper implements TextWrapper<String> {
     }
 
     @Override
-    public String modify(String text, Set<Modifier> modifiers) {
+    public String modify(String text, int modifiers) {
         return text;
     }
 

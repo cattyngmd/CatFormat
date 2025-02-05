@@ -13,12 +13,11 @@ I got tired of using Minecraft's `Text` objects like huge builders (e.g `Text.li
 
 There are a few placeholders that you need to know about:
 
-- `{}`  - Resets the current color and style to the default one.
-- `${}` - Sets the text color to the given variable color (e.g `${red}`, `${cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
-- `@{}` - Alternative for `${}`. Use this one if you're on Kotlin.
-- `#{}` - Sets the text color to the given hex value (e.g `#{fff}`, `#{ff00ff}`).
+- `{}` - Resets the current color and style to the default one.
+- `{var}` - Sets the text color to the given variable color (e.g `{red}`, `{cyan}`, check [Minecraft Color Codes](https://minecraft.tools/en/color-code.php)).
+- `{#hex}` - Sets the text color to the given hex value (e.g `{#fff}`, `{#ff00ff}`).
 - `+obius` modifiers - Sets the modifier of the text. You can also combine modifiers,
-e.g `${+bi}` - ***bold + italic***.
+e.g `{+bi}` - ***bold + italic***.
   - o - [obfuscated text](images/obfuscated.gif) 
   - b - **bold text** 
   - i - *italic text*
@@ -53,10 +52,10 @@ import dev.cattyn.catformat.fabric.FabricCatFormat;
 import java.awt.Color;
 import java.util.Random;
 
-public static final FabricCatFormat formatter = // you can create only one static instance
-        new FabricCatFormat().addVanilla();     // of the Formatter and use it everywhere!
+// you can create only one static instance of the Formatter and use it everywhere!
+FabricCatFormat formatter = new FabricCatFormat();
 
-void func() {
+void main() {
   formatter.format("${red} Hello world!"); // red colored 'Hello world!'
   formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
   formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'

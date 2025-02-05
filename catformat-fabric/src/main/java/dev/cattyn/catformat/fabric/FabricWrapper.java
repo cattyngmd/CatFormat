@@ -6,8 +6,6 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.Set;
-
 public class FabricWrapper implements TextWrapper<MutableText> {
     @Override
     public MutableText colored(MutableText text, int color) {
@@ -20,12 +18,12 @@ public class FabricWrapper implements TextWrapper<MutableText> {
     }
 
     @Override
-    public MutableText modify(MutableText text, Set<Modifier> modifiers) {
-        if (modifiers.contains(Modifier.BOLD)) text.formatted(Formatting.BOLD);
-        if (modifiers.contains(Modifier.ITALIC)) text.formatted(Formatting.ITALIC);
-        if (modifiers.contains(Modifier.UNDERLINE)) text.formatted(Formatting.UNDERLINE);
-        if (modifiers.contains(Modifier.STRIKETHROUGH)) text.formatted(Formatting.STRIKETHROUGH);
-        if (modifiers.contains(Modifier.OBFUSCATED)) text.formatted(Formatting.OBFUSCATED);
+    public MutableText modify(MutableText text, int modifiers) {
+        if (Modifier.BOLD.isIn(modifiers)) text.formatted(Formatting.BOLD);
+        if (Modifier.ITALIC.isIn(modifiers)) text.formatted(Formatting.ITALIC);
+        if (Modifier.UNDERLINE.isIn(modifiers)) text.formatted(Formatting.UNDERLINE);
+        if (Modifier.STRIKETHROUGH.isIn(modifiers)) text.formatted(Formatting.STRIKETHROUGH);
+        if (Modifier.OBFUSCATED.isIn(modifiers)) text.formatted(Formatting.OBFUSCATED);
         return text;
     }
 

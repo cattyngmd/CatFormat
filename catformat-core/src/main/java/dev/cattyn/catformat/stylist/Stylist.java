@@ -1,6 +1,6 @@
 package dev.cattyn.catformat.stylist;
 
-import dev.cattyn.catformat.formatter.FormatEntry;
+import dev.cattyn.catformat.entry.FormatEntry;
 
 import java.util.List;
 
