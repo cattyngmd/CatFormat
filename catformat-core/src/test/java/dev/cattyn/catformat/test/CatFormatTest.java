@@ -37,7 +37,7 @@ public class CatFormatTest {
         assertEquals(new ColoredText("dolor ", modifiers, 0x0000ff), children.get(1));
         modifiers = 0;
 
-        assertEquals(new ColoredText("sit", modifiers, -1), children.get(2));
+        assertEquals(new ColoredText("sit", modifiers, 0xff0000), children.get(2));
     }
 
     @Test

@@ -4,24 +4,20 @@ import dev.cattyn.catformat.parser.HexParser;
 import dev.cattyn.catformat.parser.Parser;
 import dev.cattyn.catformat.parser.NameParser;
 import dev.cattyn.catformat.text.Modifier;
+import dev.cattyn.catformat.text.TextStyle;
 import dev.cattyn.catformat.text.TextWrapper;
 import dev.cattyn.catformat.utils.ChunkType;
 import dev.cattyn.catformat.utils.StringUtils;
 
-import java.util.EnumSet;
-import java.util.Map;
+import java.util.Stack;
 
 import static dev.cattyn.catformat.utils.Constants.*;
 
 public class Formatter<T> {
-    private static final Map<Character, Parser> PARSER_MAP = Map.of(
-            HEX_TYPE, new HexParser(),
-            NAME_TYPE, new NameParser(),
-            NAME_TYPE_ALT, new NameParser()
-    );
-
     private final StringBuilder expr = new StringBuilder();
     private final StringBuilder chunk = new StringBuilder();
+
+    private final Stack<TextStyle> styles = new Stack<>();
 
     private final CatFormatImpl<T> catFormat;
     private final String target;
@@ -30,8 +26,7 @@ public class Formatter<T> {
     private T core;
 
     private Parser parser = null;
-    private int color = 0xFFFFFF;
-    private int modifiers = 0;
+    private int modifiers;
 
     private char lastOpcode;
 
@@ -129,8 +124,11 @@ public class Formatter<T> {
         if (c != END_EXPR) return false;
         type = ChunkType.ESCAPE;
 
-        if (colored()) {
-            color = parser.getColor(catFormat.entries(), expr.toString());
+        if (parser != null) {
+            int color = parser.getColor(catFormat.entries(), expr.toString());
+            styles.push(new TextStyle(color, modifiers));
+        } else {
+            styles.pop();
         }
         StringUtils.clear(expr);
         return true;
@@ -138,10 +136,11 @@ public class Formatter<T> {
 
     private T build(StringBuilder chunk) {
         T built = wrapper.newText(chunk.toString());
-        if (colored()) {
-            built = wrapper.colored(built, color);
+        if (!styles.isEmpty()) {
+            TextStyle style = styles.peek();
+            built = wrapper.colored(built, style.color());
+            built = wrapper.modify(built, style.modifiers());
         }
-        built = wrapper.modify(built, modifiers);
         StringUtils.clear(chunk);
         return built;
     }
@@ -152,7 +151,4 @@ public class Formatter<T> {
         }
     }
 
-    private boolean colored() {
-        return parser != null;
-    }
 }
