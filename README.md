@@ -56,20 +56,20 @@ import java.util.Random;
 FabricCatFormat formatter = new FabricCatFormat();
 
 void main() {
-  formatter.format("${red} Hello world!"); // red colored 'Hello world!'
-  formatter.format("#{f0f} Hello world!"); // magenta colored 'Hello world!'
-  formatter.format("#{0000ff} Hello world!"); // blue colored 'Hello world!'
-  formatter.format("${red+b} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
+  formatter.format("{red} Hello world!"); // red colored 'Hello world!'
+  formatter.format("{#f0f} Hello world!"); // magenta colored 'Hello world!'
+  formatter.format("{#0000ff} Hello world!"); // blue colored 'Hello world!'
+  formatter.format("{red+b} Hello {} world!"); // red colored 'Hello' with bold style and ' world!' without any style
 
   // It also supports Java's default formatting tool - String.format()
-  formatter.format("${red} Hello %s!", "world"); // red colored 'Hello world!'
+  formatter.format("{red} Hello %s!", "world"); // red colored 'Hello world!'
 
   // You can create your own color namespaces too!
   formatter.add("light_green", 0x99FF99);
   formatter.add("pink", Color.PINK.hashCode());
   formatter.add("random_color", () -> new Random().nextInt(0xFFFFFF));
 
-  formatter.format("${light_green} Hello ${random_color} world ${pink}!");
+  formatter.format("{light_green} Hello {random_color} world {pink}!");
 }
 ```
 
