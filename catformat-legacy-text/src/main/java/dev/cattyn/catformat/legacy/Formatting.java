@@ -24,7 +24,7 @@ public enum Formatting {
     ITALIC("italic", 'o'),
     RESET("reset", 'r');
 
-    public static final char COLOR_SIGN = '§';
+    public static final char COLOR_SIGN = '\u00A7';
 
     private final String name;
     private final char code;
