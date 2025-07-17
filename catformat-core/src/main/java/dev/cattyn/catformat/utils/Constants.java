@@ -19,6 +19,10 @@ public final class Constants {
     public static final char STRIKETHROUGH_MOD = 's';
     public static final char OBFUSCATED_MOD = 'o';
 
+    private Constants() {
+        throw new AssertionError();
+    }
+
     public static boolean isExprBracket(char c) {
         return c == BEGIN_EXPR || c == END_EXPR;
     }
