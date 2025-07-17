@@ -9,6 +9,8 @@ import dev.cattyn.catformat.text.TextWrapper;
 import dev.cattyn.catformat.utils.ChunkType;
 import dev.cattyn.catformat.utils.StringUtils;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
 import static dev.cattyn.catformat.utils.Constants.*;
@@ -17,7 +19,7 @@ public class Formatter<T> {
     private final StringBuilder expr = new StringBuilder();
     private final StringBuilder chunk = new StringBuilder();
 
-    private final Stack<TextStyle> styles = new Stack<>();
+    private final Queue<TextStyle> styles = new ArrayDeque<>();
 
     private final CatFormatImpl<T> catFormat;
     private final String target;
@@ -126,9 +128,9 @@ public class Formatter<T> {
 
         if (parser != null) {
             int color = parser.getColor(catFormat.entries(), expr.toString());
-            styles.push(new TextStyle(color, modifiers));
+            styles.add(new TextStyle(color, modifiers));
         } else {
-            styles.pop();
+            styles.poll();
         }
         StringUtils.clear(expr);
         return true;
