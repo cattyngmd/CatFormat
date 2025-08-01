@@ -35,11 +35,11 @@ maven { url "https://jitpack.io"  }
 
 And then add CatFormat as a dependency:
 ```gradle
-implementation("com.github.cattyngmd.catformat:catformat-core:2.0.3")
+implementation("com.github.cattyngmd.catformat:catformat-core:2.0.4")
 ```
 Or if you use fabric
 ```gradle
-modImplementation("com.github.cattyngmd.catformat:catformat-fabric:2.0.3")
+modImplementation("com.github.cattyngmd.catformat:catformat-fabric:2.0.4")
 ```
 
 ## Example
