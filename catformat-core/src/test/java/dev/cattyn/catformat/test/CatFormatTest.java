@@ -24,6 +24,13 @@ public class CatFormatTest {
     }
 
     @Test
+    public void blankTest() {
+        CatFormat<String> format = createFormat(new ContentWrapper());
+        String result = format.format("{red} Lorem{blue} ipsum {red}dolor sit {blue} amet, consectetur adipiscing {}elit{}");
+        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit", result);
+    }
+
+    @Test
     public void colorTest() {
         CatFormat<ColoredText> format = createFormat(new ColoredTextWrapper());
         ColoredText result = format.format("{#f00} Lorem ipsum {blue+b} dolor {} sit");

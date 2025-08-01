@@ -11,7 +11,6 @@ import dev.cattyn.catformat.utils.StringUtils;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.Stack;
 
 import static dev.cattyn.catformat.utils.Constants.*;
 
@@ -31,6 +30,7 @@ public class Formatter<T> {
     private int modifiers;
 
     private char lastOpcode;
+    private boolean lastBlank = true;
 
     public Formatter(CatFormatImpl<T> catFormat, String target) {
         this.catFormat = catFormat;
@@ -67,6 +67,8 @@ public class Formatter<T> {
             parser = null;
             return;
         }
+
+        lastBlank = opcode == BLANK;
 
         chunk.append(opcode);
     }
@@ -112,7 +114,7 @@ public class Formatter<T> {
 
         type = ChunkType.TEXT;
 
-        if (opcode == BLANK && lastOpcode == END_EXPR) {
+        if (lastBlank && opcode == BLANK && lastOpcode == END_EXPR) {
             return;
         }
 
