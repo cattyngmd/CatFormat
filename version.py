@@ -1,29 +1,22 @@
 import re
 
+regex = r"[0-9]+([.][0-9]+)+"
 version = input()
 
-if re.fullmatch(r"[0-9]+([.][0-9]+)+", version):
-    with open("README.md") as f:
+def replace_version(file_name, str, lower = True):
+    with open(file_name) as f:
         lines = []
 
         for line in f.readlines():
-            if "implementation" in line.lower():
-                print("replace")
-                lines.append(re.sub(r"[0-9]+([.][0-9]+)+", version, line))
+            if str in (line.lower() if lower else line):
+                lines.append(re.sub(regex, version, line))
             else:
                 lines.append(line)
 
-        open("README.md", "w").writelines(lines)
+        open(file_name, "w").writelines(lines)
 
-    with open("gradle.properties") as f:
-        lines = []
-
-        for line in f.readlines():
-            if line.startswith("version"):
-                lines.append(re.sub(r"[0-9]+([.][0-9]+)+", version, line))
-            else:
-                lines.append(line)
-
-        open("gradle.properties", "w").writelines(lines)
+if re.fullmatch(regex, version):
+    replace_version("README.md", "implementation")
+    replace_version("gradle.properties", "version", False)
 else:
     print("version doesnt match")
