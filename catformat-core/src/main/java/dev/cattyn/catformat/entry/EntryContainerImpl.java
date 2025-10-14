@@ -4,10 +4,11 @@ import dev.cattyn.catformat.stylist.Stylist;
 import dev.cattyn.catformat.stylist.impl.ClassStylist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class EntryContainerImpl implements EntryContainer{
-    private final List<FormatEntry> formats = new ArrayList<>();
+public class EntryContainerImpl implements EntryContainer {
+    private final List<FormatEntry> formats = Collections.synchronizedList(new ArrayList<>());
     private Stylist<?> stylist = new ClassStylist();
 
     @Override
@@ -17,11 +18,10 @@ public class EntryContainerImpl implements EntryContainer{
 
     @Override
     public FormatEntry get(String name) {
-        for (FormatEntry format : formats) {
-            if (format.name().equalsIgnoreCase(name))
-                return format;
-        }
-        return NULL_FORMAT;
+        return formats.stream()
+                .filter(f -> f.name().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(NULL_FORMAT);
     }
 
     @Override
