@@ -31,6 +31,13 @@ public class CatFormatTest {
     }
 
     @Test
+    public void chainingTest() {
+        CatFormat<String> format = createFormat(new ContentWrapper());
+        String result = format.format("{red}{blue}{green}Hello{}");
+        assertEquals("Hello", result);
+    }
+
+    @Test
     public void colorTest() {
         CatFormat<ColoredText> format = createFormat(new ColoredTextWrapper());
         ColoredText result = format.format("{#f00} Lorem ipsum {blue+b} dolor {} sit");
