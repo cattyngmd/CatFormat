@@ -10,6 +10,7 @@ public final class StringUtils {
     }
 
     public static void shrink(StringBuilder sb) {
+        if (sb.isEmpty()) return;
         sb.setLength(sb.length() - 1);
     }
 }

@@ -41,10 +41,11 @@ public class Formatter<T> {
     public T handle() {
         for (char c : target.toCharArray()) {
             switch (type) {
-                case TEXT   -> handleText(c);
-                case EXPR   -> handleExpr(c);
-                case MOD    -> handleMod(c);
-                case ESCAPE -> handleEscape(c);
+                case TEXT          -> handleText(c);
+                case EXPR          -> handleExpr(c);
+                case MOD           -> handleMod(c);
+                case ESCAPE        -> handleEscape(c, false);
+                case ESCAPE_STRICT -> handleEscape(c, true);
             }
             lastOpcode = c;
         }
@@ -60,10 +61,7 @@ public class Formatter<T> {
         }
 
         if (opcode == BEGIN_EXPR) {
-            type = ChunkType.EXPR;
-            concat();
-            modifiers = 0;
-            parser = null;
+            beginExpr();
             return;
         }
 
@@ -103,7 +101,12 @@ public class Formatter<T> {
         Modifier.from(opcode).ifPresent(mod -> modifiers = mod.with(modifiers));
     }
 
-    private void handleEscape(char opcode) {
+    private void handleEscape(char opcode, boolean onlyBlank) {
+        if (onlyBlank && opcode == BEGIN_EXPR) {
+            beginExpr();
+            return;
+        }
+
         if (isExprBracket(opcode)) {
             type = ChunkType.TEXT;
             StringUtils.shrink(chunk);
@@ -125,7 +128,7 @@ public class Formatter<T> {
 
     private boolean endExpr(char c) {
         if (c != END_EXPR) return false;
-        type = ChunkType.ESCAPE;
+        type = ChunkType.ESCAPE_STRICT;
 
         if (parser != null) {
             int color = parser.getColor(catFormat.entries(), expr.toString());
@@ -135,6 +138,13 @@ public class Formatter<T> {
         }
         StringUtils.clear(expr);
         return true;
+    }
+
+    private void beginExpr() {
+        type = ChunkType.EXPR;
+        concat();
+        modifiers = 0;
+        parser = null;
     }
 
     private T build(StringBuilder chunk) {
@@ -153,5 +163,4 @@ public class Formatter<T> {
             core = wrapper.concat(core, build(chunk));
         }
     }
-
 }
