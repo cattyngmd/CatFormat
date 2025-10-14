@@ -2,6 +2,7 @@ package dev.cattyn.catformat;
 
 import dev.cattyn.catformat.entry.EntryContainer;
 import dev.cattyn.catformat.entry.FormatEntry;
+import dev.cattyn.catformat.formatter.ThreadSafeFormatter;
 import dev.cattyn.catformat.text.TextWrapper;
 
 import java.util.function.Consumer;
@@ -15,7 +16,7 @@ public interface CatFormat<T> {
     T format(String s);
 
     default T format(String s, Object... o) {
-        return format(s.formatted(o));
+        return format(ThreadSafeFormatter.format(s, o));
     }
 
     default CatFormat<T> styled(Consumer<EntryContainer> consumer) {
