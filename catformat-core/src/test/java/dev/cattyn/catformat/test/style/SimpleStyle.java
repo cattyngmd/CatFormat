@@ -21,4 +21,9 @@ public class SimpleStyle {
         if (DARK_MODE) return Color.white.hashCode();
         return Color.black.hashCode();
     }
+
+    @Style("background-color")
+    static ColorHolder getBackgroundColor() {
+        return new ColorHolder(-1);
+    }
 }

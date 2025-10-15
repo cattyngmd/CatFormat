@@ -46,15 +46,17 @@ public class StylistTest {
 
     // maybe its autistic But I don't really Care.
     private void assertStyle(CatFormat<String> format, Runnable setDynamicToGreen, Runnable enableDarkMode) {
-        assertEquals(format.entries().get("MAGENTA_LIGHT_COLOR").getColor(), Color.magenta.brighter().hashCode());
-        assertEquals(format.entries().get("black").getColor(), Color.black.hashCode());
+        assertEquals(Color.magenta.brighter().hashCode(), format.entries().get("MAGENTA_LIGHT_COLOR").getColor());
+        assertEquals(Color.black.hashCode(), format.entries().get("black").getColor());
 
-        assertEquals(format.entries().get("dynamic").getColor(), Color.blue.hashCode());
+        assertEquals(Color.blue.hashCode(), format.entries().get("dynamic").getColor());
         setDynamicToGreen.run();
-        assertEquals(format.entries().get("dynamic").getColor(), Color.green.hashCode());
+        assertEquals(Color.green.hashCode(), format.entries().get("dynamic").getColor());
 
-        assertEquals(format.entries().get("theme-color").getColor(), Color.black.hashCode());
+        assertEquals(Color.black.hashCode(), format.entries().get("theme-color").getColor());
         enableDarkMode.run();
-        assertEquals(format.entries().get("theme-color").getColor(), Color.white.hashCode());
+        assertEquals(Color.white.hashCode(), format.entries().get("theme-color").getColor());
+
+        assertEquals(-1, format.entries().get("background-color").getColor());
     }
 }

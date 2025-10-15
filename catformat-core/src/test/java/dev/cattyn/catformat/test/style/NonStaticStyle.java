@@ -21,4 +21,9 @@ public class NonStaticStyle {
         if (darkMode) return Color.white.hashCode();
         return Color.black.hashCode();
     }
+
+    @Style("background-color")
+    ColorHolder getBackgroundColor() {
+        return new ColorHolder(-1);
+    }
 }
