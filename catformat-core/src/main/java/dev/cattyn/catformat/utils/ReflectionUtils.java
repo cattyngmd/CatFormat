@@ -1,5 +1,7 @@
 package dev.cattyn.catformat.utils;
 
+import dev.cattyn.catformat.stylist.color.ColorProvider;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.AccessibleObject;
@@ -16,7 +18,9 @@ public final class ReflectionUtils {
         return Modifier.isStatic(field.getModifiers());
     }
 
-    public static boolean isFinal(Member field) {
+    public static boolean isFinal(Field field) {
+        if (field.getType().isAssignableFrom(ColorProvider.Mutable.class))
+            return false;
         return Modifier.isFinal(field.getModifiers());
     }
 
