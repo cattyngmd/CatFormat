@@ -4,7 +4,7 @@ import dev.cattyn.catformat.entry.FormatEntry;
 import dev.cattyn.catformat.stylist.ColorStylist;
 import dev.cattyn.catformat.stylist.Stylist;
 import dev.cattyn.catformat.stylist.annotations.Style;
-import dev.cattyn.catformat.stylist.wrappers.ColorWrapper;
+import dev.cattyn.catformat.stylist.color.ColorWrapper;
 import dev.cattyn.catformat.utils.ReflectionUtils;
 
 import java.lang.reflect.AnnotatedElement;

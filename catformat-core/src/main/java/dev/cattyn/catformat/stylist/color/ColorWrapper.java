@@ -1,4 +1,4 @@
-package dev.cattyn.catformat.stylist.wrappers;
+package dev.cattyn.catformat.stylist.color;
 
 public interface ColorWrapper<T> {
     int getRGB(T o);
