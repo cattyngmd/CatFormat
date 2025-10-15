@@ -77,6 +77,8 @@ Also, you can use classes with colors and use them in your CatFormat string:
 
 ```java
 import dev.cattyn.catformat.stylist.annotations.*;
+import dev.cattyn.catformat.stylist.color.*;
+import java.util.Random;
 import java.awt.*;
 
 class Styles {
@@ -97,6 +99,28 @@ class Styles {
     @Style("random")
     int getRandomColor() { // Beware, you cant pass any params
         return new Random().nextInt(0xFFFFFF);
+    }
+}
+
+// Custom color objects are supported with `ARGBProvider` interface
+public record ColorHolder(int rgb) implements ColorProvider { 
+    @Override 
+    public int getRGB() {
+        return rgb;
+    }
+}
+
+// If the object is mutable you should use `ARGBProvider.Mutable`
+public class ColorHolderMutable implements ColorProvider.Mutable {
+    private int rgb;
+    
+    public void setColor(int color) {
+        this.color = color;
+    }
+    
+    @Override
+    public int getRGB() {
+      return rgb;
     }
 }
 ```
