@@ -57,6 +57,6 @@ public class StylistTest {
         enableDarkMode.run();
         assertEquals(Color.white.hashCode(), format.entries().get("theme-color").getColor());
 
-        assertEquals(-1, format.entries().get("background-color").getColor());
+        assertEquals(0xff0000, format.entries().get("background-color").getColor());
     }
 }

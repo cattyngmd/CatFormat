@@ -24,6 +24,6 @@ public class SimpleStyle {
 
     @Style("background-color")
     static ColorHolder getBackgroundColor() {
-        return new ColorHolder(-1);
+        return new ColorHolder(0xff0000);
     }
 }
