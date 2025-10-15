@@ -1,6 +1,7 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
 import dev.cattyn.catformat.stylist.ColorStylist;
+import dev.cattyn.catformat.stylist.exceptions.StylistException;
 
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
@@ -32,7 +33,7 @@ public final class FieldStylist extends MemberStylist<Field> {
             Object o = field.get(parent);
             return () -> o;
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new StylistException("Failed to access field", e);
         }
     }
 

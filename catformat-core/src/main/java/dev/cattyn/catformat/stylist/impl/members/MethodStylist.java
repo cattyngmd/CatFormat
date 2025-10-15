@@ -1,6 +1,7 @@
 package dev.cattyn.catformat.stylist.impl.members;
 
 import dev.cattyn.catformat.stylist.ColorStylist;
+import dev.cattyn.catformat.stylist.exceptions.StylistException;
 
 import java.lang.invoke.*;
 import java.lang.reflect.Method;
@@ -35,7 +36,7 @@ public final class MethodStylist extends MemberStylist<Method> {
             );
             return buildSupplier(callSite.getTarget(), isStatic(member));
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            throw new StylistException("Failed to create lambda", e);
         }
     }
 

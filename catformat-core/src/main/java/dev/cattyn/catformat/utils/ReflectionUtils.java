@@ -1,6 +1,7 @@
 package dev.cattyn.catformat.utils;
 
 import dev.cattyn.catformat.stylist.color.ColorProvider;
+import dev.cattyn.catformat.stylist.exceptions.StylistException;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
@@ -41,7 +42,7 @@ public final class ReflectionUtils {
             MethodHandles.Lookup lookup = lookup(field);
             return lookup.unreflectVarHandle(field);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new StylistException("Failed to unreflect variable", e);
         }
     }
 
