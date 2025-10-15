@@ -39,7 +39,9 @@ public class Formatter<T> {
     }
 
     public T handle() {
-        for (char c : target.toCharArray()) {
+        int len = target.length();
+        for (int i = 0; i < len; i++) {
+            char c = target.charAt(i);
             switch (type) {
                 case TEXT          -> handleText(c);
                 case EXPR          -> handleExpr(c);
