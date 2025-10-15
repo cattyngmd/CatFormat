@@ -2,12 +2,15 @@ package dev.cattyn.catformat.formatter;
 
 import java.util.Formatter;
 
-public final class ThreadSafeFormatter {
+public final class LazyFormatter implements TextFormatter {
+    public static final LazyFormatter INSTANCE = new LazyFormatter();
+
     private static final ThreadLocal<FormatPair> COMMON_FORMATTER = ThreadLocal.withInitial(FormatPair::new);
 
-    private ThreadSafeFormatter() { }
+    private LazyFormatter() { }
 
-    public static String format(String s, Object... objects) {
+    @Override
+    public String format(String s, Object... objects) {
         FormatPair pair = COMMON_FORMATTER.get();
         pair.builder.setLength(0);
         return pair.formatter.format(s, objects).toString();
